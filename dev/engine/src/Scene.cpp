@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "GameObject.h"
+#include "Game.h"
 #include <components/Renderer.h>
 #include <components/SpriteRenderer.h>
 #include <components/RectCollider.h>
@@ -20,6 +21,10 @@ void Scene::AddObject(GameObject* object)
 
     object->scene = this;
     object->instanceId = instanceId;
+
+    instanceId++;
+
+    if (CurrentGame == nullptr) return; // вызываем только во время игры
 	
     std::vector<Behaviour*> behaviours = object->GetComponents<Behaviour>();
 
@@ -40,9 +45,56 @@ void Scene::AddObject(GameObject* object)
         spriteRenderers[i]->SyncTransform();
     }
 
-	instanceId++;
-    
+    std::vector<RectCollider*> rectColliders = object->GetComponents<RectCollider>();
+
+    for (size_t i = 0; i < rectColliders.size(); i++)
+    {
+        if (rectColliders[i]->enabled == false) continue;
+
+        rectColliders[i]->SyncTransform();
+    }
 }
+
+void Scene::Start()
+{
+    for (size_t i = 0; i < objects.size(); i++)
+    {
+        if (objects[i]->active == false) continue;
+
+        // sync colliders
+        std::vector<RectCollider*> rectColliders = objects[i]->GetComponents<RectCollider>();
+
+        for (size_t j = 0; j < rectColliders.size(); j++)
+        {
+            if (rectColliders[j]->enabled == false) continue;
+
+            rectColliders[j]->SyncTransform();
+        }
+
+
+
+        // sync renderers
+        std::vector<Renderer*> renderers = objects[i]->GetComponents<Renderer>();
+
+        for (size_t j = 0; j < renderers.size(); j++)
+        {
+            if (renderers[j]->enabled == false) continue;
+
+            renderers[j]->SyncTransform();
+        }
+
+        // update behaciour
+        std::vector<Behaviour*> behaviours = objects[i]->GetComponents<Behaviour>();
+
+        for (size_t j = 0; j < behaviours.size(); j++)
+        {
+            if (behaviours[j]->enabled == true)
+                behaviours[j]->Start();
+        }
+    }
+}
+
+
 
 void Scene::RemoveObject(GameObject* object)
 {
@@ -57,6 +109,7 @@ void Scene::RemoveObject(GameObject* object)
 
     delete object;
 }
+
 // Как-то это все более правильно написать
 void Scene::Render(RenderWindow &window)
 {

@@ -15,6 +15,8 @@ public:
     void RemoveObject(GameObject* object);
     void Render(RenderWindow &window);  
 
+    void Start();
+
     void UpdateCollision();
     void Update();
    

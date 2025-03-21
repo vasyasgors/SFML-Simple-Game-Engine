@@ -29,6 +29,7 @@
     <ClCompile Include="dev\game\src\main.cpp" />
     <ClCompile Include="dev\game\src\PlayerMovement.cpp" />
     <ClCompile Include="dev\engine\src\components\RectCollider.cpp" />
+    <ClCompile Include="dev\engine\src\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dev\engine\include\components\Behaviour.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="dev\engine\include\components\SpriteRenderer.h" />
     <ClInclude Include="dev\game\include\PlayerMovement.h" />
     <ClInclude Include="dev\engine\include\components\RectCollider.h" />
+    <ClInclude Include="dev\engine\include\Game.h" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\**">

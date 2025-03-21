@@ -6,21 +6,19 @@
 #include <components/SpriteRenderer.h>
 #include <components/RectCollider.h>
 #include <PlayerMovement.h>
+#include "Game.h"
 
 
 int main()
 {
 
-    sf::RenderWindow window(sf::VideoMode({ 800, 600 }), "SFML works!");
-    sf::Event event;
-    
+     
     Texture playerTexture;
     playerTexture.loadFromFile(SPRITE_PATH + "hero.png");
+    playerTexture.setSmooth(true);
 
     Texture groundTexture;
     groundTexture.loadFromFile(SPRITE_PATH + "test.png");
-
-
 
     GameObject* player = new GameObject("Player");
 
@@ -41,38 +39,29 @@ int main()
     floor->setPosition(100, 300);
 
   
-
-
-
+    
     Scene level_1;
     level_1.name = "adasdad";
 
     level_1.AddObject(floor);
     level_1.AddObject(player);
+
+   
+    Game game({ 800, 600 }, "Redball");
+
+    Game::mainCamera->setCenter(player->getPosition().x, player->getPosition().y);
+
+
+
+ 
+
+
+ 
+
+
+    game.StartGame(&level_1);
+   
   
-
-    while (window.isOpen())
-    {
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed) window.close();
-        }
-
-        window.clear();
-
-        level_1.Update();
-
-        level_1.UpdateCollision();
-    
-
-        level_1.Render(window);
-     
-        
-
-
-        window.display();
-    }
-    
 
   
 }
