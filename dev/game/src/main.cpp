@@ -12,17 +12,9 @@
 int main()
 {
 
-     
-    Texture playerTexture;
-    playerTexture.loadFromFile(SPRITE_PATH + "hero.png");
-    playerTexture.setSmooth(true);
-
-    Texture groundTexture;
-    groundTexture.loadFromFile(SPRITE_PATH + "test.png");
-
+    
     GameObject* player = new GameObject("Player");
-
-    player->AddComponent(new SpriteRenderer(playerTexture));
+    player->AddComponent(new SpriteRenderer(SPRITE_PATH + "hero.png"));
     player->AddComponent(new PlayerMovement());
     player->AddComponent(new RectCollider(sf::FloatRect(0, 0, 64, 64)) );
 
@@ -32,16 +24,19 @@ int main()
     GameObject* floor = new GameObject("Floor");
     
    
-    floor->AddComponent(new SpriteRenderer(groundTexture));
+    floor->AddComponent(new SpriteRenderer(SPRITE_PATH + "test.png"));
     floor->AddComponent(new RectCollider(sf::FloatRect(0, 10, 444, 140)) );
 
     
     floor->setPosition(100, 300);
+    floor->setScale(0.3f, 0.3f);
 
   
     
     Scene level_1;
+    level_1.showColliders = true;
     level_1.name = "adasdad";
+    //level_1.backgroundColor = sf::Color(153, 217, 234);
 
     level_1.AddObject(floor);
     level_1.AddObject(player);
@@ -51,12 +46,6 @@ int main()
 
     Game::mainCamera->setCenter(player->getPosition().x, player->getPosition().y);
 
-
-
- 
-
-
- 
 
 
     game.StartGame(&level_1);

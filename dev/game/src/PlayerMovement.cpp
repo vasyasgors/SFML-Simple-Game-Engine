@@ -12,6 +12,11 @@ void PlayerMovement::Start()
 
 }
 
+PlayerMovement::~PlayerMovement()
+{
+	std::cout << "On destory" << std::endl;
+}
+
 void PlayerMovement::OnCollision(RectCollider* other)
 {
 	//std::cout << other->gameObject->name << std::endl;
@@ -52,7 +57,7 @@ void PlayerMovement::Update()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
 
-	
+		gameObject->scene->RemoveObject(gameObject);
 
 
 		

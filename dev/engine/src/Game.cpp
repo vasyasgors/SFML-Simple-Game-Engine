@@ -39,7 +39,16 @@ void Game::StartGame(Scene* scene)
             }
         }
 
-        mainWindow->clear();
+        if (LoadedScene != nullptr)
+        {
+            mainWindow->clear(LoadedScene->backgroundColor);
+        }
+        else
+        {
+            mainWindow->clear();
+        }
+
+        
 
         mainWindow->setView(*mainCamera);
 

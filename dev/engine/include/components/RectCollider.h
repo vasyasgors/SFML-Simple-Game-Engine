@@ -13,6 +13,7 @@ public:
 	RectCollider(sf::FloatRect rect);
 
 	void SyncTransform();
+	void Render(sf::RenderWindow* window);
 
 
 	sf::FloatRect rect;

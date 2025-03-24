@@ -8,6 +8,9 @@ class SpriteRenderer : public Renderer
 
 public:
 	SpriteRenderer(sf::Texture& texture);
+	SpriteRenderer(std::string texturePath);
+	~SpriteRenderer();
+	
 
 	void Render(sf::RenderWindow* window) override;
 	void SyncTransform() override;
@@ -16,5 +19,6 @@ public:
 	bool collided;
 
 private:
+	sf::Texture* texture;
 
 };

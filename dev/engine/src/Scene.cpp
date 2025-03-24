@@ -13,7 +13,15 @@ using namespace sf;
 Scene::Scene()
 {
 	instanceId = 0;
+    this->backgroundColor = sf::Color::Black;
 }
+
+Scene::Scene(sf::Color color)
+{
+    this->backgroundColor = color;
+}
+
+
 
 void Scene::AddObject(GameObject* object)
 {
@@ -123,7 +131,20 @@ void Scene::Render(RenderWindow &window)
         {
             if (renderers[i]->enabled == false) continue;
 
-            renderers[i]-> Render(&window);
+            renderers[i]->Render(&window);
+        }
+
+        if (this->showColliders == true)
+        {
+
+            std::vector<RectCollider*> rectCollider = objects[i]->GetComponents<RectCollider>();
+
+            for (size_t i = 0; i < rectCollider.size(); i++)
+            {
+                if (rectCollider[i]->enabled == false) continue;
+
+                rectCollider[i]->Render(&window);
+            }
         }
     }
 

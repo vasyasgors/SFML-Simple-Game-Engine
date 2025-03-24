@@ -8,6 +8,21 @@ SpriteRenderer::SpriteRenderer(sf::Texture& texture)
 	collided = true;
 }
 
+SpriteRenderer::SpriteRenderer(std::string texturePath)
+{
+	this->texture = new sf::Texture();
+	this->texture->loadFromFile(texturePath);
+	sprite.setTexture(*(this->texture));
+
+	enabled = true;
+	collided = true;
+}
+
+SpriteRenderer::~SpriteRenderer()
+{
+	delete this->texture;
+}
+
 
 void SpriteRenderer::SyncTransform()
 {
@@ -23,3 +38,4 @@ void SpriteRenderer::Render(sf::RenderWindow* window)
 	
 	window->draw(sprite);
 }
+

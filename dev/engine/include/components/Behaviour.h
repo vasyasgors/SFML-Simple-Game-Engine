@@ -9,10 +9,10 @@ class Behaviour : public Component
 {
 	
 public:
+
 	virtual void Start() {};
 	virtual void Update() {};
 	virtual void OnCollision(RectCollider*  other) {};
-	virtual void OnDestroy() {};
 
 };
 
