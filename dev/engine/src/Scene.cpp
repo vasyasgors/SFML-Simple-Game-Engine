@@ -197,14 +197,18 @@ bool Scene::BoxCast(FloatRect rect)
     {
         if (objects[i]->active == false) continue;
 
-        RectCollider* rectCollider = objects[i]->GetComponent<RectCollider>();
+        std::vector<RectCollider*> rectCollider = objects[i]->GetComponents<RectCollider>();
 
-        if (rectCollider == nullptr) continue;
+        for (size_t i = 0; i < rectCollider.size(); i++)
+        {
+            if (rectCollider[i] == nullptr) continue;
 
-        if (rectCollider->enabled == false) continue;
+            if (rectCollider[i]->enabled == false) continue;
 
-        if (rectCollider->rect.intersects(rect) == true)
-            return true;
+            if (rectCollider[i]->rect.intersects(rect) == true)
+                return true;    
+        }
+
     }
 
     return false;
