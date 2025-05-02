@@ -24,7 +24,9 @@ void PlayerMovement::OnCollision(RectCollider* other)
 
 void PlayerMovement::Update() 
 {
-	
+
+	Game::mainCamera->setCenter(gameObject->getPosition().x, gameObject->getPosition().y);
+
 	//std::cout << Game::Instance()->deltaTime << std::endl;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))

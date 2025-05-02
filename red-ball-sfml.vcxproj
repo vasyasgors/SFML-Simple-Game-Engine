@@ -23,6 +23,7 @@
     <ClCompile Include="dev\engine\src\components\Renderer.cpp" />
     <ClCompile Include="dev\engine\src\components\SpriteRenderer.cpp" />
     <ClCompile Include="dev\engine\src\components\Behaviour.cpp" />
+    <ClCompile Include="dev\engine\src\components\TextRenderer.cpp" />
     <ClCompile Include="dev\engine\src\GameObject.cpp" />
     <ClCompile Include="dev\engine\src\Scene.cpp" />
     <ClCompile Include="dev\game\include\constants.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="dev\engine\include\components\Behaviour.h" />
     <ClInclude Include="dev\engine\include\components\Component.h" />
     <ClInclude Include="dev\engine\include\components\Renderer.h" />
+    <ClInclude Include="dev\engine\include\components\TextRenderer.h" />
     <ClInclude Include="dev\engine\include\Scene.h" />
     <ClInclude Include="dev\engine\include\GameObject.h" />
     <ClInclude Include="dev\engine\include\components\SpriteRenderer.h" />

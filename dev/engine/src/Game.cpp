@@ -35,12 +35,13 @@ void Game::StartGame(Scene* scene)
 
             if (event.type == sf::Event::Resized)
             {
-                 mainCamera->setSize(mainWindow->getSize().x, mainWindow->getSize().y);
+                 mainCamera->setSize(mainWindow->getSize().x, mainWindow->getSize().y);    
             }
         }
 
         if (LoadedScene != nullptr)
         {
+      
             mainWindow->clear(LoadedScene->backgroundColor);
         }
         else
