@@ -22,7 +22,6 @@ Scene::Scene(sf::Color color)
 }
 
 
-
 void Scene::AddObject(GameObject* object)
 {
     objects.push_back(object);
@@ -32,8 +31,9 @@ void Scene::AddObject(GameObject* object)
 
     instanceId++;
 
-    if (CurrentGame == nullptr) return; // вызываем только во время игры
+    if (CurrentGame == nullptr) return; 
 	
+    /*
     std::vector<Behaviour*> behaviours = object->GetComponents<Behaviour>();
 
     for (size_t i = 0; i < behaviours.size(); i++)
@@ -42,7 +42,7 @@ void Scene::AddObject(GameObject* object)
 
         behaviours[i]->Start();
     }
-
+    */
 
     std::vector<SpriteRenderer*> spriteRenderers = object->GetComponents<SpriteRenderer>();
 
@@ -91,7 +91,7 @@ void Scene::Start()
             renderers[j]->SyncTransform();
         }
 
-        // update behaciour
+        // update behaviour
         std::vector<Behaviour*> behaviours = objects[i]->GetComponents<Behaviour>();
 
         for (size_t j = 0; j < behaviours.size(); j++)
@@ -108,6 +108,27 @@ void Scene::RemoveObject(GameObject* object)
 {
     int id = object->instanceId;
 
+
+    // sync Colliders
+    std::vector<RectCollider*> rectColliders = object->GetComponents<RectCollider>();
+
+    for (size_t j = 0; j < rectColliders.size(); j++)
+    {
+        if (rectColliders[j]->enabled == false) continue;
+
+        rectColliders[j]->SyncTransform();
+    }
+
+    // sync renderers
+    std::vector<Renderer*> renderers = object->GetComponents<Renderer>();
+
+    for (size_t j = 0; j < renderers.size(); j++)
+    {
+        if (renderers[j]->enabled == false) continue;
+
+        renderers[j]->SyncTransform();
+    }
+
     auto newEnd = std::remove_if(objects.begin(), objects.end(),
         [id](GameObject* obj) {
             return obj->instanceId == id;
@@ -118,7 +139,7 @@ void Scene::RemoveObject(GameObject* object)
     delete object;
 }
 
-// Как-то это все более правильно написать
+
 void Scene::Render(RenderWindow &window)
 {
     for (int i = 0; i < objects.size(); i++)
@@ -214,7 +235,6 @@ bool Scene::BoxCast(FloatRect rect)
     return false;
 }
 
-// Если понадобиться, то запилить с учетом того, что может быть несколько спрайт ренедероров
 void Scene::UpdateCollision()
 {
     for (size_t i = 0; i < objects.size(); i++)

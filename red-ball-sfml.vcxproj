@@ -26,9 +26,7 @@
     <ClCompile Include="dev\engine\src\components\TextRenderer.cpp" />
     <ClCompile Include="dev\engine\src\GameObject.cpp" />
     <ClCompile Include="dev\engine\src\Scene.cpp" />
-    <ClCompile Include="dev\game\include\constants.h" />
-    <ClCompile Include="dev\game\src\main.cpp" />
-    <ClCompile Include="dev\game\src\PlayerMovement.cpp" />
+    <ClCompile Include="dev\game\main.cpp" />
     <ClCompile Include="dev\engine\src\components\RectCollider.cpp" />
     <ClCompile Include="dev\engine\src\Game.cpp" />
   </ItemGroup>
@@ -40,7 +38,6 @@
     <ClInclude Include="dev\engine\include\Scene.h" />
     <ClInclude Include="dev\engine\include\GameObject.h" />
     <ClInclude Include="dev\engine\include\components\SpriteRenderer.h" />
-    <ClInclude Include="dev\game\include\PlayerMovement.h" />
     <ClInclude Include="dev\engine\include\components\RectCollider.h" />
     <ClInclude Include="dev\engine\include\Game.h" />
   </ItemGroup>
